@@ -1,0 +1,17 @@
+#!/usr/bin/python
+from bs4 import BeautifulSoup
+import os
+import sys
+
+def getMeaning(url):
+	os.system('curl -s -o .page.html "'+ url +'"')
+	page 	= open('./.page.html')
+	soup	= BeautifulSoup(page, 'html.parser')
+	items 	= soup.find_all('article')
+        for item in  items:
+            print item.text
+	os.system('rm .page.html')
+
+if __name__ == '__main__':
+    if len(sys.argv) == 2:
+        getMeaning("http://www.merriam-webster.com/dictionary/" + sys.argv[1])
